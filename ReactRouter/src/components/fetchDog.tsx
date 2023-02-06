@@ -6,7 +6,7 @@ type DOGS ={
     text:string
    }
    
-async function fetchDog( id:number ) {
+async function fetchDog( id:string ) {
     const { data } = await axios.get<DOGS[]>(`http://localhost:3004/dogs/${id}`)
     return data
 }

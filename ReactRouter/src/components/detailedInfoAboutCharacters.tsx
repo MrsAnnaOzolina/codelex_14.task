@@ -1,8 +1,9 @@
 import {useQuery} from "@tanstack/react-query"
 import fetchDog from "./fetchDog";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-type DOGS ={ 
+type Dogs ={ 
   id:number,
   image: string,
   title:string,
@@ -10,17 +11,23 @@ type DOGS ={
  }
 
 function DetailedInfoAboutCharacters() {
-  let { id } = useParams();
-const {data, isError, isLoading} = useQuery <DOGS[]>({
+  let { id } = useParams<{id:string}>();
+  const navigate = useNavigate();
+  const goBack = () => {
+		navigate(-1);
+	}
+const {data, isError, isLoading} = useQuery <Dogs[]>({
   queryKey:["dogs", id],
-  queryFn: () =>  fetchDog(id)
+  queryFn: () =>  fetchDog(id!)
 })
 
 if (isLoading) {
   return <div>Loading...</div>
 }
 if (isError || !data) {
-  return <div>Error!</div>
+  navigate('/')
+  return null
+  // <div>Error!</div>
 }
 
   return (
@@ -30,6 +37,7 @@ if (isError || !data) {
       {data.title}
       </h1>
         <p>{data.text}</p>
+        <button className="waves-effect waves-light btn" onClick={goBack}>back</button>
     </div>
   )
 }

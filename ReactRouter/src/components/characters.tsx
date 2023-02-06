@@ -1,6 +1,8 @@
 import {useQuery} from "@tanstack/react-query"
 import fetchPosts from "./fetchPosts"
 import './CSS/characters.css'
+import { Link } from "react-router-dom";
+
 
  type Dogs ={ 
   id:number,
@@ -28,15 +30,13 @@ if (isError || !data) {
     <div id="characters">
       <h1>Dogs</h1>
       <div className="dogCards">
+
       {data.map( dog => {
-        return  <div key={dog.id} className="dogCards__dog">
-                    <h1  >{dog.title}</h1>
-          {/* <img src={dog.image} width="300px"/><br></br> */}
-              <a  href={`characters/${dog.id}`}
-              >
-                Click on to find out more about dog
-              </a>
-          </div>
+        return <Link to={`/characters/${dog.id}`} > 
+        <div key={dog.id} className="dogCards__dog">
+        <h1>{dog.title}</h1>
+        </div>
+        </Link>
       })
       
     }
@@ -46,3 +46,9 @@ if (isError || !data) {
 }
 
 export default  Characters;
+
+       
+              {/* <a  href={`characters/${dog.id}`}
+              >
+                Click on to find out more about dog
+              </a> */}
