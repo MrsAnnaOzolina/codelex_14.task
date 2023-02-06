@@ -7,7 +7,8 @@
 }
 .dogCards__dog{
     border-radius: 20px;
-    border:3px solid #535bf2;
+    border:3px solid #e57373;
     max-width: 600px;
     padding :40px; 
+    margin-top: 50px;
 }

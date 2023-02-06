@@ -2,10 +2,16 @@ import {useQuery} from "@tanstack/react-query"
 import fetchDog from "./fetchDog";
 import { useParams } from "react-router";
 
+type DOGS ={ 
+  id:number,
+  image: string,
+  title:string,
+  text:string
+ }
 
 function DetailedInfoAboutCharacters() {
   let { id } = useParams();
-const {data,error, isError, isLoading} = useQuery({
+const {data, isError, isLoading} = useQuery <DOGS[]>({
   queryKey:["dogs", id],
   queryFn: () =>  fetchDog(id)
 })
@@ -13,8 +19,8 @@ const {data,error, isError, isLoading} = useQuery({
 if (isLoading) {
   return <div>Loading...</div>
 }
-if (isError) {
-  return <div>Error! {error.message}</div>
+if (isError || !data) {
+  return <div>Error!</div>
 }
 
   return (

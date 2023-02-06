@@ -2,7 +2,7 @@ import {useQuery} from "@tanstack/react-query"
 import fetchPosts from "./fetchPosts"
 import './CSS/characters.css'
 
- type DOGS ={ 
+ type Dogs ={ 
   id:number,
   image: string,
   title:string,
@@ -11,16 +11,17 @@ import './CSS/characters.css'
 
 
 function Characters() {
-const {data,error, isError, isLoading} = useQuery({
+const {data, isError, isLoading} = useQuery<Dogs[]>({
   queryKey:["dogs"],
   queryFn: fetchPosts
 })
 
+
 if (isLoading) {
   return <div>Loading...</div>
 }
-if (isError) {
-  return <div>Error! {error.message}</div>
+if (isError || !data) {
+  return <div>Error!</div>
 }
 
   return (
@@ -31,8 +32,7 @@ if (isError) {
         return  <div key={dog.id} className="dogCards__dog">
                     <h1  >{dog.title}</h1>
           {/* <img src={dog.image} width="300px"/><br></br> */}
-              <a   target="_blank"
-              href={`characters/${dog.id}`}
+              <a  href={`characters/${dog.id}`}
               >
                 Click on to find out more about dog
               </a>

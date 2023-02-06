@@ -18,7 +18,6 @@ export default function Home() {
         <div id="root">
           <h1>Home page </h1>
           <div>
-           
           </div>
           <nav>
             <ul>
@@ -31,7 +30,6 @@ export default function Home() {
             </ul>
           </nav>
         </div>
-        <div id="detail"></div>
       </>
     );
   }
